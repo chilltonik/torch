@@ -58,15 +58,19 @@ class DigitNN(nn.Module):
         super().__init__()
         self.layer1 = nn.Linear(input_dim, num_hidden)
         self.layer2 = nn.Linear(num_hidden, output_dim)
+        self.dropout_1 = nn.Dropout(0.3)
+        self.bm_1 = nn.BatchNorm1d(num_hidden)
 
     def forward(self, x):
         x = self.layer1(x)
         x = nn.functional.relu(x)
+        # x = self.dropout_1(x) or
+        x = self.bm_1(x)
         x = self.layer2(x)
         return x
 
 
-model = DigitNN(28 * 28, 32, 10)
+model = DigitNN(28 * 28, 128, 10)
 
 transforms = tfs.Compose(
     [
@@ -87,7 +91,7 @@ train_data_val = data.DataLoader(d_val, batch_size=32, shuffle=False)
 
 
 
-optimizer = optim.Adam(params=model.parameters(), lr=0.01)
+optimizer = optim.Adam(params=model.parameters(), lr=0.01)#, weight_decay=0.001)
 loss_function = nn.CrossEntropyLoss()
 
 epochs = 20 # 2
