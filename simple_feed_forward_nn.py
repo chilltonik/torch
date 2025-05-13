@@ -33,6 +33,6 @@ def iteration(
     return bool(U2)
 
 
-if __name__ == "__main__":
-    i: bool = iteration(X=X, W1=W1, W2=W2)
-    print(i)
+# if __name__ == "__main__":
+#     i: bool = iteration(X=X, W1=W1, W2=W2)
+#     print(i)

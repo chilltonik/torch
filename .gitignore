@@ -1,5 +1,6 @@
 /mnist
 /images
+/dataset_gen_reg
 
 venv
 .idea
